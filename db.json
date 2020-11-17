@@ -10,7 +10,7 @@
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 8
+      "likes": 9
     },
     {
       "id": 3,
@@ -47,6 +47,18 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "Toy",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftjmaxx.tjx.com%2Fstore%2Fjump%2Fproduct%2FElsa-Hair-Doll%2F1000569220&psig=AOvVaw3xlsFbQoXM7PyUt_wJZGQU&ust=1605668128972000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDD4IbKiO0CFQAAAAAdAAAAABAD",
+      "likes": 0,
+      "id": 9
+    },
+    {
+      "name": "Toy",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftjmaxx.tjx.com%2Fstore%2Fjump%2Fproduct%2FElsa-Hair-Doll%2F1000569220&psig=AOvVaw3xlsFbQoXM7PyUt_wJZGQU&ust=1605668128972000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDD4IbKiO0CFQAAAAAdAAAAABAD",
+      "likes": 0,
+      "id": 10
     }
   ]
 }
