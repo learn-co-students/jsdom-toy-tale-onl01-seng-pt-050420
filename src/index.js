@@ -40,7 +40,7 @@ function addToys(toys){
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
-        11},
+          },
           body: JSON.stringify({
             "likes": like
           })
