@@ -15,25 +15,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:3000/toys")
-  .then(response => response.json())
-  .then(toys => iterateOverToys(toys))
+  getToys().then(toys => {
+    toys.forEach(toy => {
+      renderToys(toy)
+    })
+  })
 });
 
-function iterateOverToys(toys){
-  for(const key in toys){
-    console.log(toy["key"]);
-  }
+function getToys(){
+  return fetch("http://localhost:3000/toys")
+  .then(response => response.json())
 };
 
-function createAndAppendToy(object){
+function renderToys(toy){
   let toyCollection = document.getElementById("toy-collection");
-  let toyCard = document.createElement("div");
-  toyCard.classList.add("card");
-  toyCard.innerText += `Name: ${object.name}, Likes: ${object.likes}`;
-  let toyImage = document.createElement("img");
-  toyImage.src = object.image;
-  toyImage.style = "max-height: 100%; max-width: 100%"
-  toyCollection.appendChild(toyCard);
-  toyCard.appendChild(toyImage);
+
+  let h2 = document.createElement("h2");
+  h2.innerText = toy.name;
+
+  let img = document.createElement("img");
+  img.setAttribute("src", toy.image);
+  img.setAttribute("class", "toy-avatar");
+
+  let p = document.createElement("p");
+  p.innerText = `${toy.likes} likes`
+
+  let divCard = document.createElement("div");
+  divCard.setAttribute("class", "card");
+  divCard.append(h2, img, p);
+  toyCollection.append(divCard);
 };
