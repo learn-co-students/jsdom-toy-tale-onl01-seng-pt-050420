@@ -1,5 +1,6 @@
 let addToy = false;
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector("#new-toy-btn");
   const toyFormContainer = document.querySelector(".container");
@@ -26,32 +27,15 @@ fetch("http://localhost:3000/toys")
     addToys(obj)
 });
 
-function addToys(obj){
-  const toyCollection = document.getElementById('toy-collection');
-    for(const toy of obj){
-      const card = document.createElement("div")
-      const h2 = document.createElement("h2")
-      const img = document.createElement("img")
-      const p = document.createElement("p")
-      const button = document.createElement("button")
-      card.className = "card"
-        h2.innerText = toy.name
-        img.src = toy.image
-        img.className = "toy-avatar"
-        p.innerHTML = `${toy.likes} likes`
-        button.innerHTML = "like"
-        let id = toy.id
-        addLike(button, id)
-     card.append(h2, img, p, button)  
-     toyCollection.appendChild(card)
-    }
+function addToys(toys){
+  for (let toy of toys){
+    getToyData(toy)
   }
+}
 
   function addLike(buttton, id){
     buttton.addEventListener('click', (e)=>{
       let like = parseInt(e.target.previousElementSibling.innerText) + 1
-   
-      console.log(id)
     fetch(`http://localhost:3000/toys/${id}`, {
         method: "PATCH",
         headers: {
@@ -93,7 +77,7 @@ function addToys(obj){
     });
 };
 
-    function addToyData(toy){
+    function getToyData(toy){
       const toyCollection = document.getElementById('toy-collection');
       const card = document.createElement("div")
       const h2 = document.createElement("h2")
