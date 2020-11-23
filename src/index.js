@@ -32,24 +32,23 @@ function addToys(toys){
     getToyData(toy)
   }
 }
-
-  function addLike(buttton, id){
+ function addLike(buttton, id){
     buttton.addEventListener('click', (e)=>{
       let like = parseInt(e.target.previousElementSibling.innerText) + 1
-    fetch(`http://localhost:3000/toys/${id}`, {
-        method: "PATCH",
-        headers: {
+        fetch(`http://localhost:3000/toys/${id}`, {
+          method: "PATCH",
+          headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
-        },
+        11},
           body: JSON.stringify({
             "likes": like
           })
         })
-        .then(res => res.json())
-        .then((like_obj => {
+          .then(res => res.json())
+          .then(like_obj => {
           e.target.previousElementSibling.innerText = `${like} likes`;
-        }))
+          })
     } 
   )} 
 
