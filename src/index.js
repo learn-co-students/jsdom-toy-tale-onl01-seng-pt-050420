@@ -1,8 +1,18 @@
 let addToy = false;
+let glyphStates = {
+  "♡": "♥",
+  "♥": "♡"
+};
+
+let colorStates = {
+  "red" : "",
+  "": "red"
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector("#new-toy-btn");
   const toyFormContainer = document.querySelector(".container");
+  const toyForm = document.querySelector(".add-toy-form");
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
     addToy = !addToy;
@@ -13,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   fetchToys()
-  renderToys()
-  toyFormContainer.addEventListener('submit', createToy)
+  toyForm.addEventListener('submit', submitData)
+  
 });
 
 function fetchToys() {
@@ -39,7 +49,7 @@ function renderToys(toys) {
     const button = document.createElement('button')
     button.innerHTML = "like " + '♡'
     button.setAttribute('class', 'like-btn')
-    button.addEventListener('click',function(){
+    button.addEventListener('click', function(){
       element = p;
       beforeLike(toy)
     })
@@ -48,12 +58,12 @@ function renderToys(toys) {
 }
 
 function createToy(e){
-  e.preventDefault();
   console.log(e);
-  submitData()
+  submitData().then
 }
 
-function submitData(name, image, likes){
+function submitData(e){
+  e.preventDefault();
   let configObj = {
       method: "POST",
       headers: {
@@ -81,3 +91,49 @@ function submitData(name, image, likes){
           document.body.innerHTML = error.message
         });
 };
+
+
+function beforeLike(toy){
+  fetch(`http://localhost:3000/toys/${toy.id}`)
+  .then(resp => resp.json())
+  .then(data => {
+    like(data)
+  })
+}
+
+function like(toy){
+  let parsed = parseInt(toy.likes);
+  let newNumberOfLikes = parsed + 1
+  fetch(`http://localhost:3000/toys/${toy.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      likes: newNumberOfLikes
+    })
+  })
+  .then(resp => resp.json())
+  .then(data => {
+     element.innerHTML = newNumberOfLikes + " " + 'Likes';
+     console.log(newNumberOfLikes)
+     console.log(toy)
+    })
+}
+
+
+
+function likeCallback(e) {
+  let heart = e.target;
+  mimicServerCall()
+    .then(function(serverMessage){
+      alert("You notified the server!");
+      alert(serverMessage);
+      heart.innerText = glyphStates[heart.innerText];
+      heart.style.color = colorStates[heart.style.color];
+    })
+    .catch(function(error) {
+      alert("Something went wrong!");
+    });
+}
