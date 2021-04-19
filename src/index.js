@@ -58,7 +58,6 @@ function renderToys(toys) {
 }
 
 function createToy(e){
-  console.log(e);
   submitData().then
 }
 
@@ -82,7 +81,7 @@ function submitData(e){
       return response.json();
       })
       .then(function(object) {
-      console.log(object);
+      // console.log(object);
       renderToys(object)
       })
       .catch(function(error) {
@@ -116,7 +115,7 @@ function like(toy){
   })
   .then(resp => resp.json())
   .then(data => {
-     element.innerHTML = newNumberOfLikes + " " + 'Likes';
+     element.innerHTML = `${newNumberOfLikes}` + " " + "Likes";
      console.log(newNumberOfLikes)
      console.log(toy)
     })
